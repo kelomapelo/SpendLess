@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#2196f3">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>SpendLess</title>
+
+  <link rel="stylesheet" href="css/framework7.md.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/framework7.keypad.min.css">
+
+
+</head>
+<body>
+  <div id="app">
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar"></div>
+    <!-- Left panel with cover effect-->
+    <div class="panel panel-left panel-cover theme-dark">
+      <div class="view">
+        <div class="page" data-name="home">
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="title">Capital</div>
+            </div>
+          </div>
+          <div class="page-content">
+            <div class="block">
+            <!-- Contenido del panel -->
+            <div id="capital">
+              
+            </div                 <!-- Parte de abajo -->
+                <br>
+                <a class="button button-fill button-big tab-link" href="#view-agregar">Agregar</a>
+                <br>
+                <hr>
+                <br>
+                <a class="button button-fill button-big tab-link" href="#view-calculator">Calculadora</a>
+                <br>
+                <a class="button button-fill button-big tab-link" href="#view-estadisticas">Estadisticas</a>
+                <br>
+                <a class="button button-fill button-big tab-link" href="#view-calendar">Calendario</a>
+                <br>
+                <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Views/Tabs container -->
+    <div class="views tabs ios-edges">
+      <!-- Tabbar for switching views-tabs -->
+      <div class="toolbar tabbar-labels toolbar-bottom-md">
+        <div class="toolbar-inner">
+          
+          <a href="#view-home" class="tab-link">
+            <i class="material-icons">home</i>
+            <span class="tabbar-label">Home</span>
+          </a>
+          <a href="#view-calendar" class="tab-link">
+            <i class="material-icons">date_range</i>
+            <span class="tabbar-label">Calendario</span>
+          </a>
+          <a href="#view-calculator" class="tab-link">
+            <i class="material-icons">monetization_on</i>
+            <span class="tabbar-label">Calculadora</span>
+          </a>
+          <a href="#view-estadisticas" class="tab-link">
+            <i class="material-icons">trending_up</i>
+            <span class="tabbar-label">Estadisticas</span>
+          </a>
+          <a href="#view-agregar" class="tab-link"">
+            <i class="material-icons">add_box</i>
+            <span class="tabbar-label">Agregar</span>
+          </a>
+        </div>
+      </div>
+      <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
+      <div id="view-home" class="view view-main tab tab-active">
+        <!-- Page, data-name contains page name which can be used in page callbacks -->
+        <div class="page" data-name="home">
+          <!-- Top Navbar -->
+          <div class="navbar">
+            <div class="navbar-inner">
+              <div class="left">
+                <a href="#" class="link icon-only panel-open" data-panel="left">
+                  <i class="material-icons">menu</i>
+                </a>
+              </div>
+              <div class="title">SpendLess</div>
+            </div>
+          </div>
+
+          <!-- Scrollable page content-->
+          <div class="page-content">
+            <div class="block-title">Tutorial</div>
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="/about/" class="item-content item-link">
+                    <div class="item-inner">
+                      <div class="item-title">Aprende a usar SpendLess</div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="block-title">Calculador Interes/Descuento</div>
+            <div class="block block-strong">
+              <div class="row">
+                <div class="col-50">
+                  <a href="#" class="button button-raised button-fill login-screen-open" data-login-screen="#int-screen">Calcular Interes</a>
+                </div>
+                <div class="col-50">
+                  <a href="#" class="button button-raised button-fill login-screen-open" data-login-screen="#des-screen">Calcular Descuento</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="block-title">Pedir</div>
+            <div class="block block-strong">
+                  <a class="button button-raised button-fill" onclick="pedir()">Pedir</a>
+            </div>
+            <div class="block block-strong">
+              <a class="button button-raised show-prepaired">Create or Show</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-estadisticas" class="view tab">
+      </div>
+
+      <div id="view-agregar" class="view tab">
+      </div>
+
+      <div id="view-calculator" class="view tab">
+      </div>
+
+      <div id="view-calendar" class="view tab">
+      </div>
+
+    </div>
+
+    <!-- Descuentos -->
+    <div class="login-screen" id="des-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Descuento</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Valor del producto</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="valor" placeholder="Ingrese el valor del producto">
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Descuento</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="descuento" placeholder="Ingrese el descuento">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="#" class="item-link list-button login-button">Calcular</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- Intereses -->
+    <div class="login-screen" id="int-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Interes</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Valor del producto</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="valor" placeholder="Ingrese el valor del producto">
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Interes</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="interes" placeholder="Ingrese el interes">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="#" class="item-link list-button login-button">Calcular</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+          <!-- Ingreso -->
+    <div class="login-screen" id="ing-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Ingreso</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Nombre</div>
+                    <div class="item-input-wrap">
+                      <input type="text" name="nombre" placeholder="Nombre del ingreso">
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Monto</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="monto" placeholder="Ingrese el monto">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                <div class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Fecha</div>
+                    <div class="item-input-wrap">
+                      <input type="date" placeholder="Fecha del monto" name="fecha" value="2018-01-01"/>
+                    </div>
+                  </div>
+                </div>
+                </li>
+                <li>
+                  <div class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Descripcion</div>
+                    <div class="item-input-wrap">
+                      <textarea name="des" placeholder="Puede añadir una pequeña descripcion"></textarea>
+                    </div>
+                  </div>
+                </div>
+                </li>
+              </ul>
+            </div>
+
+  <div class="block-title">Categorias</div>
+    <div class="list">
+      <ul>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Salario"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Salario</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Venta"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Venta</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Prestamo"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Prestamo</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Donacion"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Donacion</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Servicio"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Servicio</div>
+            </div>
+          </label>
+        </li>
+         <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Otros"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Otros</div>
+            </div>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="#" class="item-link list-button login-button">Guardar</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gasto -->
+    <div class="login-screen" id="gas-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Gasto</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Nombre</div>
+                    <div class="item-input-wrap">
+                      <input type="text" name="nombre" placeholder="Nombre del gasto">
+                    </div>
+                  </div>
+                </li>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Monto</div>
+                    <div class="item-input-wrap">
+                      <input type="number" pattern="[0-9]*" name="monto" placeholder="Ingrese el monto">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                <div class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Fecha</div>
+                    <div class="item-input-wrap">
+                      <input type="date" placeholder="Fecha del monto" name="fecha" value="2018-01-01"/>
+                    </div>
+                  </div>
+                </div>
+                </li>
+                <li>
+                  <div class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Descripcion</div>
+                    <div class="item-input-wrap">
+                      <textarea name="des" placeholder="Puede añadir una pequeña descripcion"></textarea>
+                    </div>
+                  </div>
+                </div>
+                </li>
+              </ul>
+            </div>
+
+  <div class="block-title">Categorias</div>
+    <div class="list">
+      <ul>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Servicios"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Servicios</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Comestibles"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Comestibles</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Indumentaria"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Indumentaria</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Familia"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Familia</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Salud"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Salud</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Regalos"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Regalos</div>
+            </div>
+          </label>
+        </li>
+         <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Transporte"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Transporte</div>
+            </div>
+          </label>
+        </li>
+        <li>
+          <label class="item-radio item-content">
+            <input type="radio" name="radio" value="Ocio"/>
+            <i class="icon icon-radio"></i>
+            <div class="item-inner">
+              <div class="item-title">Ocio</div>
+            </div>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+            <div class="list">
+              <ul>
+                <li>
+                  <a href="#" class="item-link list-button login-button">Guardar</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cordova.js"></script>
+
+  <!-- Framework7 library -->
+  <script src="js/framework7.min.js"></script>
+
+  <script src="js/routes.js"></script>
+  <!-- Your custom app scripts -->
+  <script src="js/my-app.js"></script>
+  <script src="js/framework7.keypad.min.js"></script>
+</body>
+</html>
