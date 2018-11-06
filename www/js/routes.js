@@ -4,7 +4,6 @@ routes = [
     url: './index.html',
     on: {
       pageInit: function() {
-        notificacion.open();
         inicio();
       }
     },

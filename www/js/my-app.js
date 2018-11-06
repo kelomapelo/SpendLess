@@ -8,7 +8,7 @@ var app  = new Framework7({
   name: 'SpendLess', // App name
   theme: 'auto', // Automatic theme detection
   vi: {
-    placementId: 'pltT43MAYvRgxO6gTPO',
+    placementId: 'pltd4o7ibb9rc653x14',
   },
   panel: {
     swipe: 'left'
@@ -39,6 +39,9 @@ let arreglo_global = [];
 let entradas;
 
 // Descuento
+$$('#des-screen .cancelar-button').on('click', function () {
+  app.loginScreen.close('#des-screen');
+  });
 $$('#des-screen .login-button').on('click', function () {
   var valor = $$('#des-screen [name="valor"]').val();
   var descuento = $$('#des-screen [name="descuento"]').val();
@@ -54,6 +57,9 @@ $$('#des-screen .login-button').on('click', function () {
 });
 
 // Interes
+$$('#int-screen .cancelar-button').on('click', function () {
+  app.loginScreen.close('#int-screen');
+});
 $$('#int-screen .login-button').on('click', function () {
   var valor = $$('#int-screen [name="valor"]').val();
   var interes = $$('#int-screen [name="interes"]').val();
@@ -67,6 +73,9 @@ $$('#int-screen .login-button').on('click', function () {
   app.dialog.alert('Valor del producto: $' + valor + '<br>Interes: $' + final + '<br>Valor con interes: $' + resultado);
 });
 
+$$('#ing-screen .cancelar-button').on('click', function () {
+  app.loginScreen.close('#ing-screen');
+  });
 $$('#ing-screen .login-button').on('click', function () {
   var nombre = $$('#ing-screen [name="nombre"]').val();
   var monto = $$('#ing-screen [name="monto"]').val();
@@ -93,8 +102,6 @@ $$('#ing-screen .login-button').on('click', function () {
   arreglo_global = JSON.parse(localStorage.getItem("entradas"));
 
   arreglo_global.push(arreglo);
-
-  app.dialog.alert(arreglo_global);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
 });
@@ -127,29 +134,78 @@ $$('#gas-screen .login-button').on('click', function () {
 
   arreglo_global.push(arreglo);
 
-  app.dialog.alert(arreglo_global);
-
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
 
 }); 
+
+// Borrar
+$$('#borrar-screen .cancelar-button').on('click', function () {
+  app.loginScreen.close('#borrar-screen');
+  });
+$$('#borrar-screen .login-button').on('click', function () {
+  var nombre = $$('#borrar-screen [name="nombre"]').val();
+
+  for (var i = 0; i < entradas.length; i++) { 
+    if (entradas[i][1] == nombre) {
+      app.dialog.confirm('Esta seguro de borrar el movimiento "'+ nombre +'"?', function () {
+        entradas.splice(i, 1);
+        localStorage.setItem("entradas", JSON.stringify(arreglo_global));
+        app.dialog.alert('Borrado');
+      });
+      app.loginScreen.close('#borrar-screen');
+    } else {
+      app.dialog.alert('El nombre ingresado no existe');
+      app.loginScreen.close('#borrar-screen');
+    }
+  }
+  
+});
 
 var notificacion =
   app.notification.create({
   title: 'SpendLess',
   subtitle: 'Recordatorio',
   text: 'No olvides agregar tus Gastos/Ingresos',
-  closeTimeout: 3000,
+  closeTimeout: 4000,
   });
 
 function inicio() {
   entradas = JSON.parse(localStorage.getItem("entradas"));
   capital();
+  historial();
+  notificaciones();
 }
 
+function notificaciones() {
+  notificacion.open();
+}
+
+ function estadisticsgas() {
+
+  var manzana = "50%";
+
+  var gauge = app.gauge.get('.gas-gauge');
+
+  gauge.update({
+    value: 0.9,
+    valueText: manzana,
+  });
+
+ }
+
+ function estadisticsing() {
+
+  var gauge = app.gauge.get('.ing-gauge');
+
+  gauge.update({
+    value: 0.7,
+    valueText: '90%',
+  });
+ }
+
 function pedir(){
+  capital();
   app.dialog.alert(entradas);
-  historial();
-  esta();
 }
 
 var prepairedAd;
@@ -170,20 +226,6 @@ $$('.show-prepaired').on('click', function () {
   prepairedAd.start();
 });
 
-function esta(){
-
-  y = document.getElementById("estadistica");
-    y.setAttribute('data-type', 'circle');
-    y.setAttribute('data-size', '250');
-    y.setAttribute('data-value', '0.35');
-    y.setAttribute('data-value-text', '$350');
-    y.setAttribute('data-value-text-color', '#4caf50');
-    y.setAttribute('data-value-font-size', '45');
-    y.setAttribute('data-value-font-weight', '600');
-    y.setAttribute('data-label-text', 'de $3000 son ingresos');
-    y.setAttribute('data-border-color', '#4caf50');
-    y.setAttribute('data-border-bg-color', '#f44336');
-}
 
 //HISTORIAL
 function historial(){
