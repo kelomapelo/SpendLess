@@ -126,7 +126,7 @@
               </div>
             </div>
 
-            <div class="block-title">Pedir</div>
+            <div class="block-title">Borrar</div>
             <div class="block block-strong">
                   <a class="button button-raised button-fill" onclick="pedir()">Pedir</a>
             </div>
@@ -177,13 +177,10 @@
                 </li>
               </ul>
             </div>
-            <div class="list">
-              <ul>
-                <li>
-                  <a href="#" class="item-link list-button login-button">Calcular</a>
-                </li>
-              </ul>
-            </div>
+                <p class="row">
+                  <a href="#" class="col button login-button">Calcular</a>
+                  <a href="#" class="col button color-red cancelar-button">Cancelar</a>
+              </p>
           </div>
         </div>
       </div>
@@ -215,12 +212,10 @@
                 </li>
               </ul>
             </div>
-            <div class="list">
-              <ul>
-                <li>
-                  <a href="#" class="item-link list-button login-button">Calcular</a>
-                </li>
-              </ul>
+              <p class="row">
+                  <a href="#" class="col button login-button">Calcular</a>
+                  <a href="#" class="col button color-red cancelar-button">Cancelar</a>
+              </p>
             </div>
           </div>
         </div>
@@ -335,14 +330,10 @@
         </li>
       </ul>
     </div>
-
-            <div class="list">
-              <ul>
-                <li>
-                  <a href="#" class="item-link list-button login-button">Guardar</a>
-                </li>
-              </ul>
-            </div>
+                <p class="row">
+                  <a href="#" class="col button login-button">Guardar</a>
+                  <a href="#" class="col button color-red cancelar-button">Cancelar</a>
+                </p>
           </div>
         </div>
       </div>
@@ -473,19 +464,41 @@
         </li>
       </ul>
     </div>
-
-            <div class="list">
-              <ul>
-                <li>
-                  <a href="#" class="item-link list-button login-button">Guardar</a>
-                </li>
-              </ul>
-            </div>
+                <p class="row">
+                  <a href="#" class="col button login-button">Guardar</a>
+                  <a href="#" class="col button color-red cancelar-button">Cancelar</a>
+                </p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <!-- Borrar -->
+      <div class="login-screen" id="borrar-screen">
+      <div class="view">
+        <div class="page">
+          <div class="page-content login-screen-content">
+            <div class="login-screen-title">Borrar</div>
+            <div class="list">
+              <ul>
+                <li class="item-content item-input">
+                  <div class="item-inner">
+                    <div class="item-title item-label">Nombre</div>
+                    <div class="item-input-wrap">
+                      <input type="text" name="nombre" placeholder="Nombre del movimiento que desea borrar">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+                <p class="row">
+                  <a href="#" class="col button login-button">Confirmar</a>
+                  <a href="#" class="col button color-red cancelar-button">Cancelar</a>
+                </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <script src="cordova.js"></script>
 
@@ -495,6 +508,5 @@
   <script src="js/routes.js"></script>
   <!-- Your custom app scripts -->
   <script src="js/my-app.js"></script>
-  <script src="js/framework7.keypad.min.js"></script>
 </body>
 </html>
