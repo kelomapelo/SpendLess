@@ -104,6 +104,9 @@ $$('#ing-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
+
+  capital();
+  historial();
 });
 
 $$('#gas-screen .login-button').on('click', function () {
@@ -136,6 +139,8 @@ $$('#gas-screen .login-button').on('click', function () {
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
 
+  capital();
+  historial();
 }); 
 
 // Borrar
@@ -144,6 +149,8 @@ $$('#borrar-screen .cancelar-button').on('click', function () {
   });
 $$('#borrar-screen .login-button').on('click', function () {
   var nombre = $$('#borrar-screen [name="nombre"]').val();
+
+  arreglo_global = JSON.parse(localStorage.getItem("entradas"));
 
   for (var i = 0; i < entradas.length; i++) { 
     if (entradas[i][1] == nombre) {
@@ -159,6 +166,8 @@ $$('#borrar-screen .login-button').on('click', function () {
     }
   }
   
+  capital();
+  historial();
 });
 
 var notificacion =
@@ -173,12 +182,9 @@ function inicio() {
   entradas = JSON.parse(localStorage.getItem("entradas"));
   capital();
   historial();
-  notificaciones();
-}
-
-function notificaciones() {
   notificacion.open();
 }
+
 
  function estadisticsgas() {
 
@@ -204,7 +210,6 @@ function notificaciones() {
  }
 
 function pedir(){
-  capital();
   app.dialog.alert(entradas);
 }
 
