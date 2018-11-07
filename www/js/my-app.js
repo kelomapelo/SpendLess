@@ -40,6 +40,7 @@ let entradas;
 
 // Descuento
 $$('#des-screen .cancelar-button').on('click', function () {
+  app.vi.createAd();
   app.loginScreen.close('#des-screen');
   });
 $$('#des-screen .login-button').on('click', function () {
@@ -58,6 +59,7 @@ $$('#des-screen .login-button').on('click', function () {
 
 // Interes
 $$('#int-screen .cancelar-button').on('click', function () {
+  app.vi.createAd();
   app.loginScreen.close('#int-screen');
 });
 $$('#int-screen .login-button').on('click', function () {
@@ -74,6 +76,7 @@ $$('#int-screen .login-button').on('click', function () {
 });
 
 $$('#ing-screen .cancelar-button').on('click', function () {
+  app.vi.createAd();
   app.loginScreen.close('#ing-screen');
   });
 $$('#ing-screen .login-button').on('click', function () {
@@ -104,11 +107,12 @@ $$('#ing-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
-
-  capital();
-  historial();
 });
 
+$$('#gas-screen .cancelar-button').on('click', function () {
+  app.vi.createAd();
+  app.loginScreen.close('#gas-screen');
+  });
 $$('#gas-screen .login-button').on('click', function () {
   var nombre = $$('#gas-screen [name="nombre"]').val();
   var monto1 = $$('#gas-screen [name="monto"]').val();
@@ -138,9 +142,7 @@ $$('#gas-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
-
-  capital();
-  historial();
+  
 }); 
 
 // Borrar
@@ -155,8 +157,8 @@ $$('#borrar-screen .login-button').on('click', function () {
   for (var i = 0; i < entradas.length; i++) { 
     if (entradas[i][1] == nombre) {
       app.dialog.confirm('Esta seguro de borrar el movimiento "'+ nombre +'"?', function () {
-        entradas.splice(i, 1);
-        localStorage.setItem("entradas", JSON.stringify(arreglo_global));
+        entradas.splice(i - 1, 1);
+        localStorage.setItem("entradas", JSON.stringify(entradas));
         app.dialog.alert('Borrado');
       });
       app.loginScreen.close('#borrar-screen');
@@ -166,8 +168,6 @@ $$('#borrar-screen .login-button').on('click', function () {
     }
   }
   
-  capital();
-  historial();
 });
 
 var notificacion =
@@ -175,42 +175,42 @@ var notificacion =
   title: 'SpendLess',
   subtitle: 'Recordatorio',
   text: 'No olvides agregar tus Gastos/Ingresos',
-  closeTimeout: 4000,
+  closeTimeout: 5000,
   });
 
-function inicio() {
-  entradas = JSON.parse(localStorage.getItem("entradas"));
-  capital();
-  historial();
+function iniciando() {
   notificacion.open();
 }
 
 
  function estadisticsgas() {
 
-  var manzana = "50%";
-
-  var gauge = app.gauge.get('.gas-gauge');
+  var gauge = app.gauge.get('.gasto-gauge');
 
   gauge.update({
-    value: 0.9,
-    valueText: manzana,
+    value: 0.5,
+    valueText: "50%",
   });
 
  }
 
  function estadisticsing() {
 
-  var gauge = app.gauge.get('.ing-gauge');
+  var gauge = app.gauge.get('.ingreso-gauge');
 
   gauge.update({
-    value: 0.7,
-    valueText: '90%',
+    value: 0.5,
+    valueText: "50%",
   });
  }
 
 function pedir(){
+  estadisticsgas();
+  estadisticsing();
+  entradas = JSON.parse(localStorage.getItem("entradas"));
   app.dialog.alert(entradas);
+  historial();
+  capital();
 }
 
 var prepairedAd;

@@ -4,7 +4,7 @@ routes = [
     url: './index.html',
     on: {
       pageInit: function() {
-        inicio();
+        iniciando();
       }
     },
   },
