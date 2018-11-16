@@ -73,11 +73,11 @@
             <i class="material-icons">monetization_on</i>
             <span class="tabbar-label">Calculadora</span>
           </a>
-          <a href="#view-estadisticas" class="tab-link">
+          <a href="#view-estadisticas" class="tab-link" onclick="estadisticsing(), estadisticsgas()">
             <i class="material-icons">trending_up</i>
             <span class="tabbar-label">Estadisticas</span>
           </a>
-          <a href="#view-agregar" class="tab-link"">
+          <a href="#view-agregar" class="tab-link" onclick="historial()">
             <i class="material-icons">add_box</i>
             <span class="tabbar-label">Agregar</span>
           </a>
@@ -128,10 +128,10 @@
 
             <div class="block-title">Probar</div>
             <div class="block block-strong">
-                  <a class="button button-raised button-fill" onclick="pedir()">Probar</a>
+                  <a class="button button-raised button-fill" onclick="actualizar()">Probar</a>
             </div>
             <div class="block block-strong">
-              <a class="button button-raised show-prepaired">Create or Show</a>
+              <a class="button button-raised show-prepaired">Prueba Ads</a>
             </div>
           </div>
         </div>
@@ -369,7 +369,7 @@
                   <div class="item-inner">
                     <div class="item-title item-label">Fecha</div>
                     <div class="item-input-wrap">
-                      <input type="date" placeholder="Fecha del monto" name="fecha" value="2018-01-01"/>
+                      <input type="date" placeholder="Fecha del monto" name="fecha" value="today"/>
                     </div>
                   </div>
                 </div>

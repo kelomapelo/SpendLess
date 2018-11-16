@@ -107,6 +107,8 @@ $$('#ing-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
+
+  actualizar();
 });
 
 $$('#gas-screen .cancelar-button').on('click', function () {
@@ -142,6 +144,8 @@ $$('#gas-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
+
+  actualizar();
   
 }); 
 
@@ -154,11 +158,11 @@ $$('#borrar-screen .login-button').on('click', function () {
 
   arreglo_global = JSON.parse(localStorage.getItem("entradas"));
 
-  for (var i = 0; i < entradas.length; i++) { 
-    if (entradas[i][1] == nombre) {
+  for (var i = 0; i < arreglo_global.length; i++) { 
+    if (arreglo_global[i][1] == nombre) {
       app.dialog.confirm('Esta seguro de borrar el movimiento "'+ nombre +'"?', function () {
-        entradas.splice(i - 1, 1);
-        localStorage.setItem("entradas", JSON.stringify(entradas));
+        arreglo_global.splice(i - 1, 1);
+        localStorage.setItem("entradas", JSON.stringify(arreglo_global));
         app.dialog.alert('Borrado');
       });
       app.loginScreen.close('#borrar-screen');
@@ -167,6 +171,8 @@ $$('#borrar-screen .login-button').on('click', function () {
       app.loginScreen.close('#borrar-screen');
     }
   }
+
+  actualizar();
   
 });
 
@@ -179,38 +185,78 @@ var notificacion =
   });
 
 function iniciando() {
+  arreglo_global = JSON.parse(localStorage.getItem("entradas"));
+  app.dialog.alert(arreglo_global);
+  entradas = arreglo_global;
   notificacion.open();
+  capital();
 }
-
 
  function estadisticsgas() {
 
-  var gauge = app.gauge.get('.gasto-gauge');
+  var total = 0;
+  var texto_total;
+  var valor_gas = 0;
+  var texto;
+  var valortexto;
+    for( var i = 0; i < arreglo_global.length; i++) { 
+        total += 1;
+      if (arreglo_global[i][0] == "Gasto") {
+        valor_gas += 0.1;
+        valortexto = valor_gas * 10;
+        texto = valortexto.toString();
+      }else {
+        valor_gas = 0;
+        valortexto = valor_gas;
+        texto = valortexto.toString();
+      }
+      texto_total = total.toString();
+    }
 
+  var gauge = app.gauge.get('.gasto-gauge');
+  
   gauge.update({
-    value: 0.5,
-    valueText: "50%",
+    value: valor_gas,
+    valueText: texto,
+    labelText: "de " + texto_total + " movimientos",
   });
 
  }
 
  function estadisticsing() {
+  
+  var total = 0;
+  var texto_total;
+  var valor_ing = 0;
+  var texto;
+  var valortexto;
+    for( var i = 0; i < arreglo_global.length; i++) { 
+      total += 1;
+      if (arreglo_global[i][0] == "Ingreso") {
+        valor_ing += 0.1;
+        valortexto = valor_ing * 10;
+        texto = valortexto.toString();
+      }else {
+        valor_ing = 0;
+        valortexto = valor_ing;
+        texto = valortexto.toString();
+      }
+      texto_total = total.toString();
+    }
 
   var gauge = app.gauge.get('.ingreso-gauge');
-
+  
   gauge.update({
-    value: 0.5,
-    valueText: "50%",
+    value: valor_ing,
+    valueText: texto,
+    labelText: "de " + texto_total + " movimientos",
   });
  }
 
-function pedir(){
-  estadisticsgas();
-  estadisticsing();
-  entradas = JSON.parse(localStorage.getItem("entradas"));
-  app.dialog.alert(entradas);
-  historial();
+function actualizar(){
   capital();
+  historial();
+  actualizar_calendario()
 }
 
 var prepairedAd;
@@ -238,8 +284,8 @@ function historial(){
   var rojo = "http://ximg.es/88x88/f4433/f4433.jpg";
   var verde = "http://ximg.es/88x88/4caf50/4caf50.jpg";
   var imagen;
-  for (var i = 0; i < entradas.length; i++) { 
-    if (entradas[i][2] > 0) {
+  for (var i = 0; i < arreglo_global.length; i++) { 
+    if (arreglo_global[i][2] > 0) {
       imagen = verde;
     } else {
       imagen = rojo;
@@ -259,17 +305,16 @@ function historial(){
                 '<div class="item-media"><img src=' + imagen + ' width="80"/></div>' +
                 '<div class="item-inner">' +
                   '<div class="item-title-row">' +
-                    '<div class="item-title">'+ entradas[i][1] +'</div>' +
-                    '<div class="item-after">'+ entradas[i][2] +' / '+ entradas[i][3] +'</div>' +
+                    '<div class="item-title">'+ arreglo_global[i][1] +'</div>' +
+                    '<div class="item-after">'+ '$' + arreglo_global[i][2] +' / '+ arreglo_global[i][3] +'</div>' +
                   '</div>' +
-                  '<div class="item-subtitle">'+ entradas[i][5] +'</div>' +
-                  '<div class="item-text">'+ entradas[i][4] +'</div>' +
+                  '<div class="item-subtitle">'+ arreglo_global[i][5] +'</div>' +
+                  '<div class="item-text">'+ arreglo_global[i][4] +'</div>' +
                 '</div>' +
               '</a>' +
             '</li>' +
           '</ul>' +
         '</div>'
-
   }
 }
 
@@ -292,6 +337,18 @@ function capital(){
   }
 }
 
+function actualizar_calendario() {
+        events: [
+        {
+            date: new Date(2018, 9, 8),
+            color: '#ff0000'
+        },
+        {
+            date: new Date(2018, 9, 9),
+            color: '#00ff00'
+        },
+    ]
+}
 
 //CALENDARIO
 function calendario(){
@@ -314,17 +371,6 @@ function calendario(){
       '</div>';
     },
 
-        events: [
-        {
-            date: new Date(2018, 9, 8),
-            color: '#ff0000'
-        },
-        {
-            date: new Date(2018, 9, 9),
-            color: '#00ff00'
-        },
-    ],
-
     on: {
       init: function (c) {
         $$('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] +', ' + c.currentYear);
@@ -334,6 +380,7 @@ function calendario(){
         $$('.calendar-custom-toolbar .right .link').on('click', function () {
           calendarInline.nextMonth();
         });
+        actualizar_calendario();
       },
       monthYearChangeStart: function (c) {
         $$('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] +', ' + c.currentYear);

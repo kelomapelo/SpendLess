@@ -5,6 +5,8 @@ routes = [
     on: {
       pageInit: function() {
         iniciando();
+        historial();
+
       }
     },
   },
@@ -15,10 +17,21 @@ routes = [
   {
     path: '/agregar/',
     url: './pages/agregar.html',
+        on: {
+      pageInit: function() {
+        historial();
+      }
+    },
   },
   {
     path: '/estadisticas/',
     url: './pages/estadisticas.html',
+    on: {
+      pageInit: function() {
+        estadisticsing();
+        estadisticsgas();
+      }
+    },
   },
   {
     path: '/calculator/',

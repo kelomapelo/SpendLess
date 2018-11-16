@@ -48,8 +48,8 @@ input[type="button"] {
     font-size: 420%;
     outline: none;
     height: 100%;
-    transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 input[type="text"] {
     border: none;
@@ -66,44 +66,44 @@ input[type="text"] {
 .bgcolornumber {
     background-color: #f1f1f1;
     color: #333;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .bgclear {
     background: #CC0000;
     color: #f9f9f9;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
  
 //.bgoperationcolor is use for all operation buttons (+,-,*,/)
 .bgopeationcolor {
     background-color: #663399;
     color: #f9f9f9;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .equal {
     background-color: #66CC33;
     color: #f9f9f9;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .bgcolornumber:hover {
     background-color: #222;
     color: #f5f5f5;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .bgclear:hover {
     background-color: #FF0000;
     color: #f5f5f5;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .bgoperationcolor:hover {
     background-color: #0033CC;
     ;
     color: #f9f9f9;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .equal:hover {
     background-color: #66FF00;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 input[type="text"]:active {
     font-size: 75px;
