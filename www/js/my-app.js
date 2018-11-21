@@ -108,7 +108,6 @@ $$('#ing-screen .login-button').on('click', function () {
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
 
-  actualizar();
 });
 
 $$('#gas-screen .cancelar-button').on('click', function () {
@@ -144,8 +143,6 @@ $$('#gas-screen .login-button').on('click', function () {
   arreglo_global.push(arreglo);
 
   localStorage.setItem("entradas", JSON.stringify(arreglo_global));
-
-  actualizar();
   
 }); 
 
@@ -171,8 +168,6 @@ $$('#borrar-screen .login-button').on('click', function () {
       app.loginScreen.close('#borrar-screen');
     }
   }
-
-  actualizar();
   
 });
 
@@ -206,7 +201,6 @@ function iniciando() {
         valortexto = valor_gas * 10;
         texto = valortexto.toString();
       }else {
-        valor_gas = 0;
         valortexto = valor_gas;
         texto = valortexto.toString();
       }
@@ -237,7 +231,6 @@ function iniciando() {
         valortexto = valor_ing * 10;
         texto = valortexto.toString();
       }else {
-        valor_ing = 0;
         valortexto = valor_ing;
         texto = valortexto.toString();
       }
@@ -256,7 +249,6 @@ function iniciando() {
 function actualizar(){
   capital();
   historial();
-  actualizar_calendario()
 }
 
 var prepairedAd;
@@ -322,9 +314,9 @@ function historial(){
 function capital(){
   var i;
   var varcap = 0;
-  for (var i = 0; i < entradas.length; i++) {
+  for (var i = 0; i < arreglo_global.length; i++) {
     
-    numero = Number(entradas[i][2]);
+    numero = Number(arreglo_global[i][2]);
 
     varcap = varcap + numero;
 
@@ -335,19 +327,6 @@ function capital(){
   else {
     document.getElementById('capital').innerHTML = "<p class='red'>" + "$" + varcap + "</p>";
   }
-}
-
-function actualizar_calendario() {
-        events: [
-        {
-            date: new Date(2018, 9, 8),
-            color: '#ff0000'
-        },
-        {
-            date: new Date(2018, 9, 9),
-            color: '#00ff00'
-        },
-    ]
 }
 
 //CALENDARIO
@@ -380,7 +359,6 @@ function calendario(){
         $$('.calendar-custom-toolbar .right .link').on('click', function () {
           calendarInline.nextMonth();
         });
-        actualizar_calendario();
       },
       monthYearChangeStart: function (c) {
         $$('.calendar-custom-toolbar .center').text(monthNames[c.currentMonth] +', ' + c.currentYear);

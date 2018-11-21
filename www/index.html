@@ -61,23 +61,23 @@
       <div class="toolbar tabbar-labels toolbar-bottom-md">
         <div class="toolbar-inner">
           
-          <a href="#view-home" class="tab-link">
+          <a href="#view-home" class="tab-link" onclick="actualizar()">
             <i class="material-icons">home</i>
             <span class="tabbar-label">Home</span>
           </a>
-          <a href="#view-calendar" class="tab-link">
+          <a href="#view-calendar" class="tab-link" onclick="actualizar()">
             <i class="material-icons">date_range</i>
             <span class="tabbar-label">Calendario</span>
           </a>
-          <a href="#view-calculator" class="tab-link">
+          <a href="#view-calculator" class="tab-link" onclick="actualizar()">
             <i class="material-icons">monetization_on</i>
             <span class="tabbar-label">Calculadora</span>
           </a>
-          <a href="#view-estadisticas" class="tab-link" onclick="estadisticsing(), estadisticsgas()">
+          <a href="#view-estadisticas" class="tab-link" onclick="estadisticsing(), estadisticsgas(), actualizar()" >
             <i class="material-icons">trending_up</i>
             <span class="tabbar-label">Estadisticas</span>
           </a>
-          <a href="#view-agregar" class="tab-link" onclick="historial()">
+          <a href="#view-agregar" class="tab-link" onclick="historial(), actualizar()">
             <i class="material-icons">add_box</i>
             <span class="tabbar-label">Agregar</span>
           </a>
@@ -125,11 +125,7 @@
                 </div>
               </div>
             </div>
-
-            <div class="block-title">Probar</div>
-            <div class="block block-strong">
-                  <a class="button button-raised button-fill" onclick="actualizar()">Probar</a>
-            </div>
+            <div class="block-title">Prueba de anuncios</div>
             <div class="block block-strong">
               <a class="button button-raised show-prepaired">Prueba Ads</a>
             </div>
